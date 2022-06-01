@@ -1,9 +1,220 @@
 use pisosenm_inmobiliaria_dos;
 use pisosenm_inmobiliaria_tres;
 
+# checking
+# avantio properties
+select * from avantio_accomodations where id <> 0 order by id asc;
+select * from avantio_rates where accommodation_id <> 0 order by accommodation_id asc;
+select * from avantio_accomodations_locations where avantio_accomodations <> 0 order by avantio_accomodations asc;
+select * from dynamic_rooms where id <> 0 order by id asc;
+select * from avantio_accomodations_descriptions where avantio_accomodations <> 0 order by avantio_accomodations asc;
+select * from avantio_accomodations_fields where avantio_accomodations <> 0 order by avantio_accomodations asc;
+select * from avantio_accomodations_fields_bullets where avantio_accomodations <> 0 order by avantio_accomodations asc;
+select * from avantio_accomodations_pictures where avantio_accomodations <> 0 order by avantio_accomodations asc;
+select * from avantio_availabilities where accommodation_id <> 0 order by accommodation_id asc;
+select * from dynamic_document where id <> 0 order by id asc;
+select * from dynamic_plano where id <> 0 order by id asc;
+
+# own properties
+select * from hshv_avantio_accomodations where id <> 0 order by id asc;
+select * from hshv_dynamic_rooms where id <> 0 order by id asc;
+select * from mrbs_entry where room_id <> 0;
+select * from mrbs_room where id <> 0;
+select * from hshv_avantio_accomodations_pictures where hshv_dynamic_rooms <> 0 order by hshv_dynamic_rooms  asc;
+select * from hshv_avantio_accomodations_descriptions where avantio_accomodations <> 0 order by avantio_accomodations asc;
+select * from hshv_avantio_accomodations_fields where avantio_accomodations <> 0 order by avantio_accomodations asc;
+select * from hshv_avantio_accomodations_fields_bullets where avantio_accomodations <> 0 order by avantio_accomodations asc;
+select * from hshv_avantio_rates_acommodation where id_avantio_acommodation <> 0;
+select * from hshv_avantio_accomodations_locations where avantio_accomodations <> 0;
+select * from hshv_avantio_accomodations_pictures where hshv_dynamic_rooms <> 0;
+select * from hshv_avantio_availabilities where accommodation_id <> 0;
+select * from hshv_avantio_rates_acommodation where id_avantio_acommodation <> 0;
+select * from dynamic_document_hshv where id <> 0;
+select * from dynamic_plano_hshv where id <> 0;
+select * from mrbs_entry where room_id <> 0;
+select * from mrbs_room where id <> 0;
+
+
+
+
+update dynamic_taxonomy_geographic_language_fields_customitzation SET text_meta_robots = "index, follow" where id <> -1;
+
+# regiones y ciudades
+select Distinct(dgc.id) , dtglfc.dynamic_georegion
+from dynamic_taxonomy_geographic_language_fields_customitzation as dtglfc
+join dynamic_geocity as dgc on dgc.dynamic_georegion = dtglfc.dynamic_georegion
+where dtglfc.dynamic_georegion <> 0 and dtglfc.language = "es" and dgc.language = "es";
+
+# ciudades y localidades
+select Distinct(dgc.id) , dtglfc.dynamic_geocity
+from dynamic_taxonomy_geographic_language_fields_customitzation as dtglfc
+join dynamic_geolocality as dgc on dgc.dynamic_geocity = dtglfc.dynamic_geocity
+where dtglfc.dynamic_geocity <> 0 and dtglfc.language = "es" and dgc.language = "es";
+
+# localidades y distritos
+select Distinct(dgc.id) , dtglfc.dynamic_geolocality
+from dynamic_taxonomy_geographic_language_fields_customitzation as dtglfc
+join dynamic_district as dgc on dgc.dynamic_geolocality = dtglfc.dynamic_geolocality
+where dtglfc.dynamic_geolocality <> 0 and dtglfc.language = "es" and dgc.language = "es";
+
+
+# dlist codeigniter 4 all properties
+select ac.id as id, ac.text_title as text_title, ac.status , country.id as id_country, country.text_title as country_name,
+region.id as id_region, region.text_title as region_name, city.id as id_city, city.text_title as city_name,
+locality.id as id_locality, locality.text_title as locality_name
+from avantio_accomodations as ac
+left join dynamic_geocountry as country on country.id = ac.dynamic_geocountry
+left join dynamic_georegion as region on region.id = ac.dynamic_georegion
+left join dynamic_geocity as city on city.id = ac.dynamic_geocity
+left join dynamic_geolocality as locality on locality.id = ac.dynamic_geolocality
+where ac.language = "es"
+AND country.language = "es"
+AND region.language = "es"
+AND city.language = "es"
+AND locality.language = "es"
+UNION
+select bc.id as id, bc.text_title as text_title, bc.status , country.id as id_country, country.text_title as country_name,
+region.id as id_region, region.text_title as region_name, city.id as id_city, city.text_title as city_name,
+locality.id as id_locality, locality.text_title as locality_name
+from hshv_avantio_accomodations as bc
+left join dynamic_geocountry as country on country.id = bc.dynamic_geocountry
+left join dynamic_georegion as region on region.id = bc.dynamic_georegion
+left join dynamic_geocity as city on city.id = bc.dynamic_geocity
+left join dynamic_geolocality as locality on locality.id = bc.dynamic_geolocality
+where bc.language = "es"
+AND country.language = "es"
+AND region.language = "es"
+AND city.language = "es"
+AND locality.language = "es"
+ORDER BY ac.text_title , bc.text_title asc;
+
+
+
+INSERT INTO hshv_avantio_accomodations_pictures (id, hshv_dynamic_rooms , uri_900x600 , uri_650x450 , uri_99x66 , id_avantio)
+VALUES
+(3935 , 105 , "" , "" , "" , 0),
+(3936 , 105 , "" , "" , "" , 0),
+(3937 , 105 , "" , "" , "" , 0),
+(3938 , 105 , "" , "" , "" , 0),
+(3939 , 105 , "" , "" , "" , 0),
+(3940 , 105 , "" , "" , "" , 0),
+(3941 , 105 , "" , "" , "" , 0),
+(3942 , 105 , "" , "" , "" , 0),
+(3943 , 105 , "" , "" , "" , 0),
+(3944 , 105 , "" , "" , "" , 0),
+(3945 , 105 , "" , "" , "" , 0),
+(3946 , 105 , "" , "" , "" , 0),
+(3947 , 105 , "" , "" , "" , 0),
+(3948 , 105 , "" , "" , "" , 0),
+(3949 , 105 , "" , "" , "" , 0),
+(3950 , 105 , "" , "" , "" , 0),
+(3951 , 105 , "" , "" , "" , 0),
+(3952 , 105 , "" , "" , "" , 0),
+(3953 , 105 , "" , "" , "" , 0),
+(3954 , 105 , "" , "" , "" , 0),
+(3955 , 105 , "" , "" , "" , 0),
+(3956 , 105 , "" , "" , "" , 0),
+(3957 , 105 , "" , "" , "" , 0),
+(3958 , 105 , "" , "" , "" , 0),
+(3959 , 105 , "" , "" , "" , 0),
+(3960 , 105 , "" , "" , "" , 0),
+(3961 , 105 , "" , "" , "" , 0),
+(3962 , 105 , "" , "" , "" , 0),
+(3963 , 105 , "" , "" , "" , 0),
+(3964 , 105 , "" , "" , "" , 0),
+(3965 , 105 , "" , "" , "" , 0);
+
+SET 3934
+
+select * from hshv_avantio_accomodations_pictures where  hshv_dynamic_rooms >= 104;
+
+update hshv_avantio_accomodations_pictures SET uri_900x600 =  REPLACE(uri_900x600, 'propiedad_105', 'propiedad_104'),  uri_650x450  =  REPLACE(uri_900x600, 'propiedad_105', 'propiedad_104') , uri_99x66 = REPLACE(uri_99x66, 'propiedad_105', 'propiedad_104')
+where hshv_dynamic_rooms = 104;
+
+
+# UPDATE hshv_avantio_accomodations_pictures SET uri_900x600 = REPLACE(uri_900x600, 'http://tiendapisosenmanresa.com/', '');
+# assets/themes/findhouse/propiedades/propiedad_105/galeria_inmuebles/1.jpg
+
+
+UPDATE  hshv_avantio_availabilities SET accommodation_id = 104 where accommodation_id = 105;
+UPDATE  hshv_avantio_rates SET accommodation_id = 104 where accommodation_id = 105;
+
+UPDATE  hshv_avantio_rates_acommodation SET id_avantio_acommodation = 104 where id_avantio_acommodation = 105;
+
+SELECT * FROM `hshv_avantio_rates_acommodation` where id_avantio_acommodation = 104 or id_avantio_acommodation = 105
+DELETE from hshv_avantio_availabilities where accommodation_id = 105;
+SELECT * FROM `hshv_avantio_rates` where accommodation_id = 105
+
+
+# footer links
+SELECT dc.* , dr.*
+FROM
+(
+    SELECT dtglfc.id, dtglfc.dynamic_georegion , dtglfc.dynamic_geocity
+    FROM dynamic_taxonomy_geographic_language_fields_customitzation dtglfc
+    WHERE
+    dtglfc.language = "es"
+    AND (dtglfc.dynamic_georegion <> 0 OR dtglfc.dynamic_geocity <> 0)
+    ORDER BY dtglfc.dynamic_georegion asc
+) as x
+# JOIN dynamic_taxonomy_geographic_language_fields_customitzation dtglfc_dos.id = x.id
+LEFT JOIN dynamic_geocity as dc on dc.id = x.dynamic_geocity
+LEFT JOIN dynamic_georegion as dr on dr.id = x.dynamic_georegion;
+#WHERE dc.language  = "es" and dr.language = "es";
+
+
+
+# consulta para el detalle de las propiedades
+SELECT aa.* , ds.*
+FROM avantio_accomodations as aa
+JOIN dynamic_rooms as ds on ds.id = aa.id
+JOIN dynamic_taxonomy as dt on dt.id = aa.dynamic_taxonomy
+JOIN dynamic_taxonomy_group as dtg on dtg.id = aa.dynamic_taxonomy_group
+JOIN dynamic_geocountry as dgc on dgc.id = aa.dynamic_geocountry
+JOIN dynamic_georegion as dgr on dgr.id = aa.dynamic_georegion
+JOIN dynamic_geocity as dgci on dgci.id = aa.dynamic_geocity
+JOIN dynamic_geolocality as dgloc on dgloc.id = aa.dynamic_geolocality
+JOIN dynamic_geodistrict as dgdis on dgdis.id = aa.dynamic_geodistrict
+WHERE
+aa.language = "es"
+AND
+ds.language = "es"
+AND
+dt.language = "es"
+AND
+dtg.language = "es"
+AND
+dgc.language = "es"
+AND
+dgr.language = "es"
+AND
+dgci.language = "es"
+AND
+dgloc.language = "es"
+AND
+dgdis.language = "es"
+AND (ds.auto_slug = "can-mola" OR ds.text_slug = "can-mola")
+UNION
+SELECT haa.* , hds.*
+FROM hshv_avantio_accomodations as haa
+JOIN hshv_dynamic_rooms as hds on hds.id = haa.id
+JOIN dynamic_taxonomy as dt on dt.id = haa.dynamic_taxonomy
+JOIN dynamic_taxonomy_group as dtg on dtg.id = haa.dynamic_taxonomy_group
+JOIN dynamic_geocountry as dgc on dgc.id = haa.dynamic_geocountry
+JOIN dynamic_georegion as dgr on dgr.id = haa.dynamic_georegion
+JOIN dynamic_geocity as dgci on dgci.id = haa.dynamic_geocity
+JOIN dynamic_geolocality as dgloc on dgloc.id = haa.dynamic_geolocality
+JOIN dynamic_geodistrict as dgdis on dgdis.id = haa.dynamic_geodistrict
+WHERE
+haa.language = "es"
+AND
+hds.language = "es"
+and (hds.auto_slug = "can-mola" OR hds.text_slug = "can-mola");
+
+
+
 
 SELECT option_value FROM wp_options WHERE option_name='active_plugins';
-
 
 SELECT p.ID, p.post_title, tr.term_taxonomy_id, t.`name`
 FROM wp_term_relationships as tr
@@ -15,7 +226,7 @@ ORDER BY p.ID;
 
 
 /*
-select * from avantio_accomodations;
+select * from c;
 select * from avantio_accomodations;
 
 
@@ -651,8 +862,6 @@ CREATE DATABASE pisosenm_inmobiliaria_tres CHARACTER SET utf8 COLLATE utf8_gener
 
 use pisosenm_inmobiliaria_tres;
 
-
-
 # select * from avantio_accomodations_pictures where uri_900x600 like "http://img.crs.itsolutions.es/fotos/2/1633583943b10a211f83efaaa1b8a328607c2a6867/%";
 # assets/themes/findhouse/propiedades/propiedad_4/galeria_inmuebles/greenbay01.jpg
 # UPDATE avantio_accomodations_pictures SET uri_900x600 = REPLACE(uri_900x600, 'http://tiendapisosenmanresa.com/', '');
@@ -701,6 +910,20 @@ select * from dynamic_plano_hshv where id <> 0;
 select * from hshv_avantio_accomodations_locations where avantio_accomodations <> 0;
 select * from mrbs_entry where room_id <> 0;
 select * from mrbs_room where id <> 0;
+
+
+select * from avantio_accomodations where id <> 0;
+select * from avantio_rates_acommodation where id_avantio_acommodation <> 0;
+select * from avantio_accomodations_locations where avantio_accomodations <> 0;
+select * from dynamic_rooms where id <> 0;
+select * from avantio_accomodations_descriptions where avantio_accomodations <> 0;
+select * from avantio_accomodations_fields where avantio_accomodations <> 0;
+select * from avantio_accomodations_fields_bullets where avantio_accomodations <> 0;
+select * from avantio_accomodations_pictures where hshv_dynamic_rooms <> 0;
+select * from avantio_availabilities where accommodation_id <> 0;
+select * from dynamic_document where id <> 0;
+select * from dynamic_plano where id <> 0;
+
 
 
 SELECT count(*) as total 
@@ -5513,6 +5736,58 @@ CREATE TABLE `dynamic_gallery_inmo_dos` (
   `position` int(11) DEFAULT NULL,
   PRIMARY KEY (`id` , `language`)
 ) ENGINE=MyISAM CHARACTER SET Utf8 COLLATE utf8_general_ci COMMENT='Galeria inmuebles';  
-  
-  
-   */
+*/
+
+
+delete FROM automatizacion where id <> -1;
+delete FROM avantio_accomodations where id <> -1;
+delete FROM avantio_accomodations_descriptions where avantio_accomodations <> -1;
+delete FROM avantio_accomodations_descriptions_tmp where avantio_accomodations <> -1;
+delete FROM avantio_accomodations_extras where avantio_accomodations <> -1;
+delete FROM avantio_accomodations_extras_tmp where avantio_accomodations <> -1;
+delete FROM avantio_accomodations_fields where avantio_accomodations <> -1;
+delete FROM avantio_accomodations_fields_bullets where avantio_accomodations <> -1;
+delete FROM avantio_accomodations_locations where avantio_accomodations <> -1;
+delete FROM avantio_accomodations_locations_tmp where avantio_accomodations <> -1;
+delete FROM avantio_accomodations_nearest_places where avantio_accomodations <> -1;
+delete FROM avantio_accomodations_nearest_places_tmp where avantio_accomodations <> -1;
+delete FROM avantio_accomodations_pictures where avantio_accomodations <> -1;
+delete FROM avantio_accomodations_pictures_tmp where avantio_accomodations <> -1;
+delete FROM avantio_accomodations_tmp where id <> -1;
+delete FROM avantio_availabilities where accommodation_id <> -1;
+delete FROM avantio_availabilities_tmp where accommodation_id <> -1;
+delete FROM avantio_inmovilla where id <> -1;
+delete FROM avantio_occupation_rules where id <> -1;
+delete FROM avantio_occupation_rules_names where id <> -1;
+delete FROM avantio_occupation_rules_tmp where id <> -1;
+delete FROM avantio_pricemodifiers where id <> -1;
+delete FROM avantio_pricemodifiers_tmp where id <> -1;
+delete FROM avantio_pricemodifiers_tmp_vlad where id <> -1;
+delete FROM avantio_rates where accommodation_id <> -1;
+
+
+SELECT *  FROM automatizacion where id <> -1;
+SELECT *  FROM avantio_accomodations where id <> -1;
+SELECT *  FROM avantio_accomodations_descriptions where avantio_accomodations <> -1;
+SELECT *  FROM avantio_accomodations_descriptions_tmp where avantio_accomodations <> -1;
+SELECT *  FROM avantio_accomodations_extras where avantio_accomodations <> -1;
+SELECT *  FROM avantio_accomodations_extras_tmp where avantio_accomodations <> -1;
+SELECT *  FROM avantio_accomodations_fields where avantio_accomodations <> -1;
+SELECT *  FROM avantio_accomodations_fields_bullets where avantio_accomodations <> -1;
+SELECT *  FROM avantio_accomodations_locations where avantio_accomodations <> -1;
+SELECT *  FROM avantio_accomodations_locations_tmp where avantio_accomodations <> -1;
+SELECT *  FROM avantio_accomodations_nearest_places where avantio_accomodations <> -1;
+SELECT *  FROM avantio_accomodations_nearest_places_tmp where avantio_accomodations <> -1;
+SELECT *  FROM avantio_accomodations_pictures where avantio_accomodations <> -1;
+SELECT *  FROM avantio_accomodations_pictures_tmp where avantio_accomodations <> -1;
+SELECT *  FROM avantio_accomodations_tmp where id <> -1;
+SELECT *  FROM avantio_availabilities where accommodation_id <> -1;
+SELECT *  FROM avantio_availabilities_tmp where accommodation_id <> -1;
+SELECT *  FROM avantio_inmovilla where id <> -1;
+SELECT *  FROM avantio_occupation_rules where id <> -1;
+SELECT *  FROM avantio_occupation_rules_names where id <> -1;
+SELECT *  FROM avantio_occupation_rules_tmp where id <> -1;
+SELECT *  FROM avantio_pricemodifiers where id <> -1;
+SELECT *  FROM avantio_pricemodifiers_tmp where id <> -1;
+SELECT *  FROM avantio_pricemodifiers_tmp_vlad where id <> -1;
+SELECT *  FROM avantio_rates where accommodation_id <> -1;

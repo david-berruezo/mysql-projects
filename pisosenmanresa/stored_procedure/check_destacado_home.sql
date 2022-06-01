@@ -2,7 +2,7 @@ CREATE DEFINER=`root`@`localhost` PROCEDURE `checkbox_destacado_home`()
     NO SQL
 BEGIN
     # counters
-	  DECLARE contador_piso integer;
+	DECLARE contador_piso integer;
     DECLARE contador_casa integer;
     DECLARE contador_oficina integer;
     DECLARE contador_local integer;

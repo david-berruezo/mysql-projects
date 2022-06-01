@@ -9,6 +9,60 @@ CREATE DATABASE tiendapi_inmobiliaria_dos CHARACTER SET utf8mb4 COLLATE utf8mb4_
 
 use pisosenm_inmobiliaria_tres;
 
+CREATE TABLE `plantilla`(
+`id` int(11) NOT NULL DEFAULT '0' COMMENT 'Identificador del inmueble',
+`language` int(11) NOT NULL DEFAULT '1' COMMENT 'Lenguagje aplicación',
+`text_buscar_palabra_alquilar` varchar(255) DEFAULT NULL COMMENT 'Título donde te gustaria ir',
+`text_search_checkin_admin` varchar(255) DEFAULT NULL COMMENT 'Checkin',
+`text_search_checkout_admin` varchar(255) DEFAULT NULL COMMENT 'Checkout',
+`number_search_adults` tinyint(3) DEFAULT NULL COMMENT 'Adults',
+`number_search_children` tinyint(3) DEFAULT NULL COMMENT 'Adults',
+`checkbox_services_2` tinyint(3) DEFAULT NULL COMMENT 'Aire condicionado',
+`checkbox_chimenea` tinyint(3) DEFAULT NULL COMMENT 'Chimenea',
+`checkbox_gimnasio` tinyint(3) DEFAULT NULL COMMENT 'Gimnasio',
+`checkbox_jacuzzi` tinyint(3) DEFAULT NULL COMMENT 'Jacuzzi',
+`carac_9` tinyint(3) DEFAULT NULL COMMENT 'Zona infantil',
+`checkbox_tennis` tinyint(3) DEFAULT NULL COMMENT 'Tenis',
+`services_9` tinyint(3) DEFAULT NULL COMMENT 'Mascotas',
+`checkbox_cine` tinyint(3) DEFAULT NULL COMMENT 'Cine',
+`checkbox_tv` tinyint(3) DEFAULT NULL COMMENT 'tv',
+`services_5` tinyint(3) DEFAULT NULL COMMENT 'Piscina climatizada',
+`carac_3` tinyint(3) DEFAULT NULL COMMENT 'Seguridad piscina',
+`carac_13` tinyint(3) DEFAULT NULL COMMENT 'Yoga',
+`checkbox_barbacoa` tinyint(3) DEFAULT NULL COMMENT 'Barbacoa',
+`services_8` tinyint(3) DEFAULT NULL COMMENT 'Wifi',
+`checkbox_piscina` tinyint(3) DEFAULT NULL COMMENT 'Piscina',
+`checkbox_terraza` tinyint(3) DEFAULT NULL COMMENT 'Terraza',
+`checkbox_flexibles` tinyint(3) DEFAULT NULL COMMENT 'Flexibles',
+`checkbox_homeaway` tinyint(3) DEFAULT NULL COMMENT 'HomeAway',
+`number_aseos` tinyint(3) DEFAULT NULL COMMENT 'Aseos',
+`number_habitaciones` tinyint(3) DEFAULT NULL COMMENT 'Habitaciones',
+`number_status_activas` tinyint(3) DEFAULT NULL COMMENT 'Status',
+`number_properties` tinyint(3) DEFAULT NULL COMMENT 'Properties',
+`number_taxonomy_group` tinyint(3) DEFAULT NULL COMMENT 'Taxonomy group',
+`number_geocountry` tinyint(3) DEFAULT NULL COMMENT 'Geocuntry',
+`number_geoarea` tinyint(3) DEFAULT NULL COMMENT 'Geoarea',
+`number_georegion` tinyint(3) DEFAULT NULL COMMENT 'Georegion',
+`number_geocity` tinyint(3) DEFAULT NULL COMMENT 'Geocity',
+`number_geolocality` tinyint(3) DEFAULT NULL COMMENT 'Geolocality',
+`number_geodistrict` tinyint(3) DEFAULT NULL COMMENT 'Geodistrict',
+`text_page_title` varchar(255) DEFAULT NULL COMMENT 'Título sobre el alojamiento',
+`auto_slug` varchar(255) NOT NULL DEFAULT '' COMMENT 'Url corta (auto slug)',
+`text_slug` varchar(255) NOT NULL DEFAULT '' COMMENT 'Url manual (vacío usará auto slug)',
+`text_meta_keywords` varchar(255) DEFAULT NULL COMMENT 'Meta Keywords (máx 255 characters)',
+`text_meta_robots` varchar(255) DEFAULT NULL COMMENT 'Meta Robots (max 45 characters)',
+`text_meta_description` text COMMENT 'Meta Description (max 255 characters)',
+`textarea_scripts_header` text COMMENT 'Aditional header scripts (Add tags &lt;script&gt;&lt;/script&gt;)',
+`textarea_scripts_body` text COMMENT 'Aditional footer scripts (Add tags &lt;script&gt;&lt;/script&gt;)',
+`status` varchar(128) DEFAULT NULL,
+`position` int(11) NOT NULL DEFAULT '0',
+PRIMARY KEY (`id`,`language`)
+) ENGINE=InnoDB CHARACTER SET Utf8 COLLATE utf8_general_ci COMMENT = 'Plantilla';
+
+
+
+
+
 ############################################################ rooms and characteristics ############################################################################
 
 CREATE TABLE `dynamic_room` (
@@ -970,6 +1024,24 @@ CREATE TABLE `dynamic_geocountry` (
   `position` int(11) NOT NULL DEFAULT '0',
   PRIMARY KEY (`id`,`language`)
 ) ENGINE=InnoDB CHARACTER SET Utf8 COLLATE utf8_general_ci COMMENT='Geografic - Países';
+
+# geoarea
+CREATE TABLE `dynamic_geoarea` (
+  `id` int(11) NOT NULL COMMENT 'Título',
+  `language` int(11) NOT NULL DEFAULT '1' COMMENT 'Lenguagje aplicación',
+  `dynamic_geocountry` int(11) NOT NULL DEFAULT '0' COMMENT 'País',
+  `text_title` varchar(255) DEFAULT NULL COMMENT 'Título (máximo 255 caracteres)',
+  `status` varchar(128) DEFAULT NULL,
+  `position` int(11) NOT NULL DEFAULT '0',
+  PRIMARY KEY (`id`,`language`)
+) ENGINE=InnoDB CHARACTER SET Utf8 COLLATE utf8_general_ci COMMENT='Geografic - Area';
+
+alter table `dynamic_georegion` add column `dynamic_geoarea` int(11) NOT NULL DEFAULT '0' COMMENT 'Area';
+
+alter table `avantio_accomodations` add column `dynamic_geoarea` int(11) NOT NULL DEFAULT '0' COMMENT 'Area';
+alter table `hshv_avantio_accomodations` add column `dynamic_geoarea` int(11) NOT NULL DEFAULT '0' COMMENT 'Area';
+alter table `dynamic_taxonomy_geographic_language_fields_customitzation` add column `dynamic_geoarea` int(11) NOT NULL DEFAULT '0' COMMENT 'Area';
+alter table `dynamic_geoarea` add column multiple_dynamic_georegion varchar(255) COMMENT "regiones";
 
 
 # Serian como Comunidades Autónomas

@@ -1,25 +1,154 @@
+
+# get room
 select ds.dynamic_agencia,ds.text_latitud,ds.text_altitud,ds.text_title,ds.auto_slug,ds.text_slug,ds.number_precioinmo,ds.number_precioalq,ds.text_ref,ds.text_zona, da.text_title as accion,
-                dg.image_1 as foto1,dg.image_2 as foto2,dgu.image_1 as foto3,dgu.image_2 as foto4,dg.text_title_image_1,dg.text_title_image_2,dgl.text_title as geolocality,dgc.text_title as geocity,
-                ai.number_habitaciones as habitaciones,ai.number_banyos,ai.number_aseos,dtg.text_title as taxonomia_group,dgci.text_title as cp, daa.text_title as agencia,daa.id as id_agencia,
-                daa.auto_slug as auto_slug_agencia,daa.text_slug as text_slug_agencia, usu.text_title as usuario,usu.id as id_usuario,usu.auto_slug as auto_slug_usuario,usu.text_slug as text_slug_usuario,
-                ds.dynamic_taxonomy_group,ds.dynamic_taxonomy,ds.dynamic_geolocality,dgip.image_principal
+dg.image_1 as foto1,dg.image_2 as foto2,dgu.image_1 as foto3,dgu.image_2 as foto4,dg.text_title_image_1,dg.text_title_image_2,dgl.text_title as geolocality,dgc.text_title as geocity,
+ai.number_habitaciones as habitaciones,ai.number_banyos,ai.number_aseos,dtg.text_title as taxonomia_group,dgci.text_title as cp, daa.text_title as agencia,daa.id as id_agencia,
+daa.auto_slug as auto_slug_agencia,daa.text_slug as text_slug_agencia, usu.text_title as usuario,usu.id as id_usuario,usu.auto_slug as auto_slug_usuario,usu.text_slug as text_slug_usuario,
+ds.dynamic_taxonomy_group,ds.dynamic_taxonomy,ds.dynamic_geolocality,dgip.image_principal
 from dynamic_rooms as ds
-    left join avantio_inmovilla as ai on ai.id = ds.id
-    left join dynamic_accion as da on da.id = ds.dynamic_accion
-    left join dynamic_agencia as daa on daa.id = ds.dynamic_agencia
-    left join dynamic_usuario as usu on usu.id = ds.dynamic_usuario
-    left join dynamic_gallery_inmo_principal as dgip on dgip.id = ds.dynamic_agencia
-    left join dynamic_gallery_inmo as dg on dg.id = ds.dynamic_gallery_inmo
-    left join dynamic_gallery_usuario as dgu on dgu.id = ds.dynamic_gallery_usuario
-    left join dynamic_geocity as dgc on dgc.id = ds.dynamic_geocity
-    left join dynamic_geolocality as dgl on dgl.id = ds.dynamic_geolocality
-    left join dynamic_geodistrict as dgci on dgci.id = ds.dynamic_geolocality
-    left join dynamic_taxonomy as dt on dt.id = ds.dynamic_taxonomy
-    left join dynamic_taxonomy_group as dtg on dtg.id = ds.dynamic_taxonomy_group
+left join avantio_inmovilla as ai on ai.id = ds.id
+left join dynamic_accion as da on da.id = ds.dynamic_accion
+left join dynamic_agencia as daa on daa.id = ds.dynamic_agencia
+left join dynamic_usuario as usu on usu.id = ds.dynamic_usuario
+left join dynamic_gallery_inmo_principal as dgip on dgip.id = ds.dynamic_agencia
+left join dynamic_gallery_inmo as dg on dg.id = ds.dynamic_gallery_inmo
+left join dynamic_gallery_usuario as dgu on dgu.id = ds.dynamic_gallery_usuario
+left join dynamic_geocity as dgc on dgc.id = ds.dynamic_geocity
+left join dynamic_geolocality as dgl on dgl.id = ds.dynamic_geolocality
+left join dynamic_geodistrict as dgci on dgci.id = ds.dynamic_geolocality
+left join dynamic_taxonomy as dt on dt.id = ds.dynamic_taxonomy
+left join dynamic_taxonomy_group as dtg on dtg.id = ds.dynamic_taxonomy_group
 where ds.checkbox_destacado_detalle_inmobiliaria_lateral = 1
-  AND ds.language = 'es'
+AND ds.language = 'es'
 group by ds.dynamic_agencia order by ds.dynamic_agencia asc ;
 
+# get all tables from information_schema.tables
+SELECT table_name
+FROM information_schema.tables
+WHERE table_schema = "pisosenm_inmobiliaria_seis";
+
+# group agencies select
+SELECT * FROM dynamic_rooms;
+
+# all selects
+SELECT * FROM automatizacion;
+SELECT * FROM avantio_inmovilla;
+SELECT * FROM avantio_inmovilla_online;
+SELECT * FROM ci_sessions;
+SELECT * FROM contacto;
+SELECT * FROM devices;
+SELECT * FROM dynamic_accion;
+SELECT * FROM dynamic_advantages;
+SELECT * FROM dynamic_agencia;
+SELECT * FROM dynamic_agencia_online;
+SELECT * FROM dynamic_agente_inmobiliario;
+SELECT * FROM dynamic_agente_inmobiliario_online;
+SELECT * FROM dynamic_cron;
+SELECT * FROM dynamic_documents_inmo;
+SELECT * FROM dynamic_documents_usuario;
+SELECT * FROM dynamic_empresa;
+SELECT * FROM dynamic_faqsagentes;
+SELECT * FROM dynamic_faqsagentes_type;
+SELECT * FROM dynamic_faqsinmobiliarias;
+SELECT * FROM dynamic_faqsinmobiliarias_type;
+SELECT * FROM dynamic_faqspropietarios;
+SELECT * FROM dynamic_faqspropietarios_type;
+SELECT * FROM dynamic_franquicia;
+SELECT * FROM dynamic_gallery_agente_inmobiliario_principal;
+SELECT * FROM dynamic_gallery_empresa;
+SELECT * FROM dynamic_gallery_empresa_banner;
+SELECT * FROM dynamic_gallery_empresa_principal;
+SELECT * FROM dynamic_gallery_franquicia_principal;
+SELECT * FROM dynamic_gallery_inmo;
+SELECT * FROM dynamic_gallery_inmo_online;
+SELECT * FROM dynamic_gallery_inmo_principal;
+SELECT * FROM dynamic_gallery_usuario;
+SELECT * FROM dynamic_gallery_usuario_principal;
+SELECT * FROM dynamic_geocity;
+SELECT * FROM dynamic_geocountry;
+SELECT * FROM dynamic_geodistrict;
+SELECT * FROM dynamic_geolocality;
+SELECT * FROM dynamic_georegion;
+SELECT * FROM dynamic_mail_empresa;
+SELECT * FROM dynamic_mail_tipo_portal;
+SELECT * FROM dynamic_offers;
+SELECT * FROM dynamic_offers_taxonomy;
+SELECT * FROM dynamic_pages;
+SELECT * FROM dynamic_rooms;
+SELECT * FROM dynamic_rooms_online;
+SELECT * FROM dynamic_taxonomy;
+SELECT * FROM dynamic_taxonomy_city;
+SELECT * FROM dynamic_taxonomy_group;
+SELECT * FROM dynamic_testimonials;
+SELECT * FROM dynamic_usuario;
+SELECT * FROM dynamic_usuario_online;
+SELECT * FROM inmovilla_calidades;
+SELECT * FROM inmovilla_ciudades;
+SELECT * FROM inmovilla_paises;
+SELECT * FROM inmovilla_tipos;
+SELECT * FROM languages;
+SELECT * FROM message;
+SELECT * FROM newsletter;
+SELECT * FROM password_reset;
+SELECT * FROM preferences;
+SELECT * FROM roles;
+SELECT * FROM users;
+SELECT * FROM users_old;
+SELECT * FROM users_online;
+
+# copy rows from database pisosenm_inmobiliaria_cinco table users
+# to pisosenm_inmobiliaria_seis table users_dos
+# the first 70 rows
+INSERT INTO users_dos
+SELECT u.*
+FROM pisosenm_inmobiliaria_cinco.users as u
+WHERE id < 70;
+
+# get all tables from information_schema.tables
+SELECT table_name
+FROM information_schema.tables
+WHERE table_schema = "pisosenm_inmobiliaria_seis";
+
+# columns
+show full columns from avantio_accomodations;
+show columns from avantio_accomodations;
+
+SELECT COLUMN_NAME
+FROM information_schema.COLUMNS
+WHERE TABLE_NAME = 'avantio_accomodations';
+
+
+SELECT COLUMN_NAME
+FROM INFORMATION_SCHEMA.COLUMNS
+WHERE TABLE_NAME = "transactions"
+AND TABLE_SCHEMA = 'mydbname"
+
+
+# copy rows from database pisosenm_inmobiliaria_cinco table users
+# to pisosenm_inmobiliaria_seis table users_dos
+# the first 70 rows
+INSERT INTO users_dos(id , username , password , email , grupo , status , roleId)
+SELECT (id+70) as id , username , password , email , grupo , status , roleId
+FROM pisosenm_inmobiliaria_cinco.users as u;
+
+# get all tables from information_schema.tables
+SELECT avantio_accomodations
+FROM information_schema.tables
+WHERE table_schema = "phpandfr_portvil_dos";
+
+
+# create table
+CREATE TABLE users_tres like users;
+
+# copy rows from users to users_tres
+INSERT INTO users_tres
+SELECT u.*
+FROM pisosenm_inmobiliaria_seis.users as u;
+
+# rename tables
+RENAME table users to users_cuatro;
+RENAME table users_dos to users;
+RENAME table users_cuatro to users_dos;
 
 
 # use phpandfr_inmobiliaria_blog;
@@ -28,16 +157,18 @@ use pisosenm_inmobiliaria;
 set sql_safe_updates = 0;
 
 SELECT * FROM dynamic_rooms 
-    WHERE 
-    dynamic_taxonomy_group = 8 
-    AND 
-    checkbox_destacado_home = 1;
+WHERE
+dynamic_taxonomy_group = 8
+AND
+checkbox_destacado_home = 1;
     
 
 SELECT * FROM dynamic_rooms 
-    WHERE 
-    dynamic_taxonomy_group = 8;
+WHERE
+dynamic_taxonomy_group = 8;
     
+
+# all select
 
 
 # print destacados home
@@ -126,28 +257,20 @@ insert into users_temp values
 (41, "finsetinmobles" , "69b1f3b2706d3958ef6dbd456a9acf9737df5920", "info@finsetinmobles.com", "inmobiliaria", "ACTIVED", 9),
 (42, "lmfinques" , "69b1f3b2706d3958ef6dbd456a9acf9737df5920", "info@lmfinques.com", "inmobiliaria", "ACTIVED", 9);
 
-
 # where DemoTable2.StudentId=DemoTable1.PersonId
 # update users_temp, users set users_temp.id = users.id;
-
 
 INSERT INTO users_temp (username , password , email , grupo , status , roleId) 
 SELECT (username , password , email , grupo , status , roleId ) 
 FROM users where id = 1;
 
-
-
 INSERT INTO users_temp 
 (SELECT NULL , username , password , email , grupo , status , roleId  
 FROM users);
- 
-
 
 # select * from users order by id desc;
 # 24
 # select id from users where username like 'ivanpozo%';
-
-
 
 # tablas manuales 
 create table avantio_inmovilla_online like avantio_inmovilla;
@@ -157,7 +280,6 @@ create table dynamic_gallery_inmo_online like dynamic_gallery_inmo;
 create table dynamic_rooms_online like dynamic_rooms;
 create table dynamic_usuario_online like dynamic_usuario;
 create table users_online like users;
-
 
 alter table dynamic_gallery_inmo modify column image_1 varchar(255) default null comment "imagen 1";
 alter table dynamic_gallery_inmo modify column image_2 varchar(255) default null comment "imagen 2";
