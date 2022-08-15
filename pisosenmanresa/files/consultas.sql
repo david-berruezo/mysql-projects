@@ -163,6 +163,8 @@ SELECT u.*
 FROM pisosenm_inmobiliaria_cinco.users as u
 WHERE id < 70;
 
+# copy ....
+
 # get all tables from information_schema.tables
 SELECT table_name
 FROM information_schema.tables
