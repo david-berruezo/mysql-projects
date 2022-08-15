@@ -4,6 +4,26 @@
 
 use pisosenm_inmobiliaria_tres;
 
+CREATE TABLE `plantilla_room`
+(
+    `id` int(11)    NOT NULL DEFAULT '0' AUTO_INCREMENT COMMENT 'Identificador autoincremental',
+    `id_oferta` int(11) NOT NULL DEFAULT '0' COMMENT 'Identificador de oferta',
+    `id_property` int(11)    NOT NULL DEFAULT '0' COMMENT 'Identificador del inmueble',
+    `text_page_title` varchar(255),
+    `auto_slug` varchar(255) NOT NULL DEFAULT '' COMMENT 'Url corta (auto slug)',
+    `text_slug` varchar(255) NOT NULL DEFAULT '' COMMENT 'Url manual (vacío usará auto slug)',
+    `text_meta_keywords` varchar(255) DEFAULT NULL COMMENT 'Meta Keywords (máx 255 characters)',
+    `text_meta_robots` varchar(255) DEFAULT NULL COMMENT 'Meta Robots (max 45 characters)',
+    `text_meta_description` text COMMENT 'Meta Description (max 255 characters)',
+    `textarea_scripts_header` text COMMENT 'Aditional header scripts (Add tags &lt;script&gt;&lt;/script&gt;)',
+    `textarea_scripts_body` text COMMENT 'Aditional footer scripts (Add tags &lt;script&gt;&lt;/script&gt;)',
+    `status` varchar(128) DEFAULT NULL,
+    `position` int(11) NOT NULL DEFAULT '0'
+);
+
+
+
+
 ############################################################ rooms and characteristics ############################################################################
 
 CREATE TABLE `dynamic_room` (
@@ -77,7 +97,7 @@ CREATE TABLE `dynamic_room` (
   `checkbox_destacado_oferta_agente` smallint(4) DEFAULT '0' COMMENT 'Destacado en página de ofertas agente',
   `checkbox_oferta_agente` smallint(4) DEFAULT '0' COMMENT 'Página de Oferta en listados agente',
   `checkbox_destacado_newsletter_agente` smallint(4) DEFAULT '0' COMMENT 'Mostrar correo newsletter agente',
-`text_page_title` varchar(255) DEFAULT NULL COMMENT 'Título sobre el alojamiento',
+  `text_page_title` varchar(255) DEFAULT NULL COMMENT 'Título sobre el alojamiento',
   `auto_slug` varchar(255) NOT NULL DEFAULT '' COMMENT 'Url corta (auto slug)',
   `text_slug` varchar(255) NOT NULL DEFAULT '' COMMENT 'Url manual (vacío usará auto slug)',
   `text_meta_keywords` varchar(255) DEFAULT NULL COMMENT 'Meta Keywords (máx 255 characters)',

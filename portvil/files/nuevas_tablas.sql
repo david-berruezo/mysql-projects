@@ -11,6 +11,41 @@ ALTER TABLE hshv_avantio_pricemodifiers ADD COLUMN season tinyint(3) COMMENT "te
 ALTER TABLE avantio_pricemodifiers DROP COLUMN fecha_fin;
 ALTER TABLE hshv_avantio_pricemodifiers DROP COLUMN fecha_fin;
 
+DROP TABLE IF EXISTS `formulario_dudas`;
+CREATE TABLE `formulario_dudas` (
+`id` int(11) NOT NULL COMMENT "identificador",
+`user_users` int(11) NOT NULL COMMENT "identificador usuario",
+`text_duda` text NOT NULL COMMENT "Duda",
+`status` varchar(128) DEFAULT "ACTIVED",
+`position` int(11) NOT NULL DEFAULT '0',
+PRIMARY KEY (`id`,`user_users`)
+) ENGINE=INNODB DEFAULT CHARSET=utf8 COMMENT='Formulario dudas';
+
+
+--
+-- Table structure for table `avantio_occupation_rules_checkin_days`
+--
+DROP TABLE IF EXISTS `dynamic_avantio_caractteristica`;
+CREATE TABLE `dynamic_avantio_caractteristica` (
+`id` int(11) NOT NULL COMMENT "identificador",
+`language` char(3) NOT NULL DEFAULT "es" COMMENT "Idioma",
+`text_field_database` varchar(255) DEFAULT COMMENT "Campo en base de datos",
+`text_translation_field_database` varchar(255) DEFAULT "" COMMENT "Traducción campo en base de datos",
+`text_page_title` varchar(75) DEFAULT NULL COMMENT 'Título de la pestaña de la página',
+`text_slug` varchar(255) NOT NULL DEFAULT '' COMMENT 'Url manual (vacío usará auto slug)',
+`auto_slug` varchar(255) NOT NULL DEFAULT '' COMMENT 'Url corta (auto slug)',
+`text_meta_keywords` varchar(255) DEFAULT NULL COMMENT 'Meta Keywords (máx 255 carácteres)',
+`text_meta_description` varchar(255) DEFAULT NULL COMMENT 'Meta Description (max 255 characters)',
+`text_meta_robots` varchar(45) DEFAULT NULL COMMENT 'Meta Robots (max 45 characters)',
+`textarea_scripts_header` text COMMENT 'Aditional header scripts (Add tags &lt;script&gt;&lt;/script&gt;)',
+`textarea_scripts_body` text COMMENT 'Aditional footer scripts (Add tags &lt;script&gt;&lt;/script&gt;)',
+`status` varchar(128) DEFAULT "ACTIVED",
+`position` int(11) NOT NULL DEFAULT '0',
+PRIMARY KEY (`id`,`language`)
+) ENGINE=INNODB DEFAULT CHARSET=utf8 COMMENT='Caracteristicas multi idioma';
+
+
+
 --
 -- Table structure for table `avantio_occupation_rules_checkin_days`
 --
@@ -763,11 +798,3 @@ CREATE TABLE portvil_avantio_rates_names LIKE pisosenm_inmobiliaria_tres.hshv_av
 CREATE TABLE ecb_exchange LIKE pisosenm_inmobiliaria_tres.ecb_exchange;
 CREATE TABLE portvil_ecb_exchange LIKE pisosenm_inmobiliaria_tres.hshv_ecb_exchange;
 */
-
-
-
-
-
-
-
-

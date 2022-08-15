@@ -1,3 +1,62 @@
+# CASE
+SELECT users.* ,
+CASE
+    WHEN id > 1 THEN "The quantity is greater than 1"
+    WHEN id = 1 THEN "The quantity is 1"
+    ELSE "The quantity is under 30"
+END
+FROM users;
+
+# case
+SELECT users.*
+FROM users
+ORDER BY
+    (CASE
+         WHEN City IS NULL THEN Country
+         ELSE City
+    END);
+
+
+# IF
+
+
+SELECT *
+FROM users
+WHERE id IN
+(
+SELECT id FROM users
+WHERE id = 140;
+);
+
+# select and update
+UPDATE tableA SET validation_check =
+(
+SELECT if(start_DTS > end_DTS, 'VALID', '') AS validation_check
+FROM tableA
+INNER JOIN tableB ON name_A = name_B
+WHERE id_A = tableA.id_A
+)
+
+SELECT * FROM users
+JOIN
+(
+SELECT id , COUNT(*) as contador FROM users
+WHERE ID = 140;
+) AS g
+ON g.id = users.id;
+
+UPDATE users SET
+SELECT * FROM users
+WHERE ID = 140;
+
+# insert from select
+INSERT INTO users_temp (username , password , email , grupo , status , roleId)
+SELECT (username , password , email , grupo , status , roleId )
+FROM users where id = 1;
+
+INSERT INTO users_temp
+    (SELECT NULL , username , password , email , grupo , status , roleId
+     FROM users);
 
 # get room
 select ds.dynamic_agencia,ds.text_latitud,ds.text_altitud,ds.text_title,ds.auto_slug,ds.text_slug,ds.number_precioinmo,ds.number_precioalq,ds.text_ref,ds.text_zona, da.text_title as accion,
@@ -117,7 +176,6 @@ SELECT COLUMN_NAME
 FROM information_schema.COLUMNS
 WHERE TABLE_NAME = 'avantio_accomodations';
 
-
 SELECT COLUMN_NAME
 FROM INFORMATION_SCHEMA.COLUMNS
 WHERE TABLE_NAME = "transactions"
@@ -135,7 +193,6 @@ FROM pisosenm_inmobiliaria_cinco.users as u;
 SELECT avantio_accomodations
 FROM information_schema.tables
 WHERE table_schema = "phpandfr_portvil_dos";
-
 
 # create table
 CREATE TABLE users_tres like users;
@@ -208,10 +265,6 @@ dynamic_taxonomy_group = 8;
 # edificios
 # call print_propiedades_taxonomias(8);
 
-
-
-
-/*
 select * from dynamic_gallery_inmo;
 # select * from dynamic_rooms where dynamic_taxonomy_group = 1;
 # select * from dynamic_rooms where dynamic_taxonomy_group = 6
@@ -3124,3 +3177,4 @@ WHERE
    AND ds.text_antiguedad = '2012';
    
    */
+

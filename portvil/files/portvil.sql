@@ -90,8 +90,6 @@ alter table hshv_avantio_accomodations_locations CHANGE COLUMN `view_to_lake` `c
 alter table hshv_avantio_accomodations_locations CHANGE COLUMN `first_line_beach` `checkbox_first_line_beach` tinyint(4) unsigned NOT NULL DEFAULT '0' COMMENT 'First line beach';
 alter table hshv_avantio_accomodations_locations CHANGE COLUMN `first_line_golf` `checkbox_first_line_golf` tinyint(4) unsigned NOT NULL DEFAULT '0' COMMENT 'First Line golf';
 
-
-
 SELECT DISTINCT(avantio_pricemodifiers.id)
 FROM avantio_pricemodifiers
 JOIN avantio_accomodations ON avantio_accomodations.avantio_pricemodifiers = avantio_pricemodifiers.id;
@@ -192,8 +190,6 @@ CREATE TABLE `test` (
 PRIMARY KEY (`id`,`language`)
 ) ENGINE=InnoDB AUTO_INCREMENT=74 DEFAULT CHARSET=utf8 COMMENT='test';
 /*!40101 SET character_set_client = @saved_cs_client */;
-
-
 
 
 DROP TABLE IF EXISTS `dynamic_franquicia`;

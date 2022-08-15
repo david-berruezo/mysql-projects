@@ -15,28 +15,25 @@ SELECT id, avantio_occupation_rules FROM avantio_accomodations WHERE id = 297527
 # libres
 SELECT fecha, status FROM avantio_availabilities
 WHERE accommodation_id = 297527
-  AND occupation_rule_id = 1255873
-  AND fecha BETWEEN "2021-01-01" AND "2023-01-01"
-  and status = 1
+AND occupation_rule_id = 1255873
+AND fecha BETWEEN "2021-01-01" AND "2023-01-01"
+and status = 1
 ORDER BY fecha ASC ;
 
 # ocupadas
 SELECT fecha, status FROM avantio_availabilities
 WHERE accommodation_id = 297527
-  AND occupation_rule_id = 1255873
-  AND fecha BETWEEN "2021-01-01" AND "2023-01-01"
-  and status = 0
+AND occupation_rule_id = 1255873
+AND fecha BETWEEN "2021-01-01" AND "2023-01-01"
+and status = 0
 ORDER BY fecha ASC ;
 
 # datos
 SELECT fecha, checkin, checkout , min_nights
 FROM avantio_occupation_rules
 WHERE id = 1282168
-  AND fecha BETWEEN "2021-01-01" AND "2023-01-01"
+AND fecha BETWEEN "2021-01-01" AND "2023-01-01"
 ORDER BY fecha ASC ;
-
-
-
 
 
 
