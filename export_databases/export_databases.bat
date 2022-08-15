@@ -1,6 +1,6 @@
 REM NOS PONEMOS EN EL DIRECTORIO DE MYSQL
 REM cd C:\Program Files\MySQL\MySQL Server 8.0\bin
-REM mysqldump -u root -p pisosenm_inmobiliaria --password=Berruezin23 --column-statistics=0 > c:\htdocs\home\pisosenmanresa\public_html\sql\upload\pisosenm_inmobiliaria.sql
+REM mysqldump -u ohhhh -p pisosenm_inmobiliaria --password=ahhhhh --column-statistics=0 > c:\htdocs\home\pisosenmanresa\public_html\sql\upload\pisosenm_inmobiliaria.sql
 cd C:\xampp_7_3_20\mysql\bin
 mysqldump -u root -p  automoci_inmobiliaria                  --password=Berruezin23 > H:\bases_de_datos\bases_de_datos\windows\05-02-2022\automoci_inmobiliaria.sql
 mysqldump -u root -p  automoci_inmobiliaria_dos              --password=Berruezin23 > H:\bases_de_datos\bases_de_datos\windows\05-02-2022\automoci_inmobiliaria_dos.sql
