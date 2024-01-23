@@ -1,3 +1,27 @@
+
+# see all indexes
+SELECT DISTINCT TABLE_NAME, INDEX_NAME
+FROM INFORMATION_SCHEMA.STATISTICS
+WHERE TABLE_SCHEMA = 'pisosenm_inmobiliaria_siete';
+
+# show all foreign keys
+# REFERENCED_TABLE_NAME, REFERENCED_COLUMN_NAME
+SELECT DISTINCT TABLE_NAME, COLUMN_NAME, CONSTRAINT_NAME
+FROM INFORMATION_SCHEMA.KEY_COLUMN_USAGE
+WHERE REFERENCED_TABLE_SCHEMA = 'pisosenm_inmobiliaria_siete';
+
+
+SELECT TABLE_NAME,COLUMN_NAME,CONSTRAINT_NAME, REFERENCED_TABLE_NAME,REFERENCED_COLUMN_NAME
+FROM INFORMATION_SCHEMA.KEY_COLUMN_USAGE
+WHERE REFERENCED_TABLE_SCHEMA = 'pisosenm_inmobiliaria_siete'
+AND REFERENCED_TABLE_NAME = 'automatizacion';
+
+# query all foreign keys
+SELECT * FROM information_schema.TABLE_CONSTRAINTS
+WHERE information_schema.TABLE_CONSTRAINTS.CONSTRAINT_TYPE = 'FOREIGN KEY'
+AND information_schema.TABLE_CONSTRAINTS.TABLE_SCHEMA = 'pisosenm_inmobiliaria_siete';
+# AND information_schema.TABLE_CONSTRAINTS.TABLE_NAME = 'automatizacion';
+
 # CASE
 SELECT users.* ,
 CASE
@@ -164,6 +188,18 @@ FROM pisosenm_inmobiliaria_cinco.users as u
 WHERE id < 70;
 
 # copy ....
+INSERT INTO users_temp (username , password , email , grupo , status , roleId)
+SELECT (username , password , email , grupo , status , roleId )
+
+INSERT INTO dynamic_pages()
+SELECT u.*
+FROM pisosenm_inmobiliaria.dynamic_pages as u
+order by id asc;
+
+# relación uno a varios
+alter table `dynamic_pages` add constraint `fk_dynamic_pages_dynamic_gallery_franquicia_principal_constraint` foreign key (`dynamic_gallery_franquicia_principal`) references dynamic_gallery_franquicia_principal(`id`)
+on update cascade
+on delete cascade;
 
 # get all tables from information_schema.tables
 SELECT table_name

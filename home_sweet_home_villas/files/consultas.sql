@@ -34,9 +34,6 @@ select * from dynamic_plano_hshv where id <> 0;
 select * from mrbs_entry where room_id <> 0;
 select * from mrbs_room where id <> 0;
 
-
-
-
 update dynamic_taxonomy_geographic_language_fields_customitzation SET text_meta_robots = "index, follow" where id <> -1;
 
 # regiones y ciudades

@@ -1,3 +1,87 @@
+
+CREATE TABLE `avantio_portals` (
+`fecha_alta` DATE COMMENT 'Fecha alta portal',
+`nombre` varchar(128)  COMMENT 'Nombre',
+`comision` DECIMAL(5,2) COMMENT 'Comision',
+PRIMARY KEY (`fecha_alta`,`nombre`)
+) ENGINE=InnoDB CHARACTER SET Utf8 COLLATE utf8_general_ci COMMENT='Avantio Portals';
+
+
+CREATE TABLE `hshv_avantio_booking_agencia` (
+`booking_code` int(11) NOT NULL COMMENT 'id booking',
+`id_agencia` int(11) NOT NULL COMMENT 'id agencia',
+`booking_date` TIMESTAMP NOT NULL COMMENT 'booking date',
+PRIMARY KEY (`booking_code`)
+) ENGINE=InnoDB CHARACTER SET Utf8 COLLATE utf8_general_ci COMMENT='Hshv Avantio Agencia';
+
+INSERT INTO avantio_vista_previa (`id`, `avantio_accomodations` , `text_street_view`, `text_page_title` , `auto_slug` , `text_slug` , `text_meta_keywords`, `text_meta_robots` , `text_meta_description` , `textarea_scripts_header` , `textarea_scripts_body` , `status` , `position`)
+VALUES
+(
+    SELECT null,id,"","","","","","","","","","ACTIVED",0 FROM avantio_accomodations where language = "es"
+);
+
+
+CREATE TABLE `avantio_vista_previa`
+(
+    `id` int(11) NOT NULL DEFAULT '0' COMMENT 'Identificador de la vista previa',
+    `avantio_accomodations`int(11) DEFAULT '0' COMMENT 'Identificador de la propiedad',
+    `text_street_view`varchar(255) DEFAULT 'nombre cliente' COMMENT 'Nombre del cliente',
+    `text_page_title` varchar(255) DEFAULT NULL COMMENT 'Título sobre el alojamiento',
+    `auto_slug` varchar(255) NOT NULL DEFAULT '' COMMENT 'Url corta (auto slug)',
+    `text_slug` varchar(255) NOT NULL DEFAULT '' COMMENT 'Url manual (vacío usará auto slug)',
+    `text_meta_keywords` varchar(255) DEFAULT NULL COMMENT 'Meta Keywords (máx 255 characters)',
+    `text_meta_robots` varchar(255) DEFAULT NULL COMMENT 'Meta Robots (max 45 characters)',
+    `text_meta_description` text COMMENT 'Meta Description (max 255 characters)',
+    `textarea_scripts_header` text COMMENT 'Aditional header scripts (Add tags &lt;script&gt;&lt;/script&gt;)',
+    `textarea_scripts_body` text COMMENT 'Aditional footer scripts (Add tags &lt;script&gt;&lt;/script&gt;)',
+    `status` varchar(128) DEFAULT NULL,
+    `position` int(11) NOT NULL DEFAULT '0',
+    PRIMARY KEY (`id`)
+) ENGINE=InnoDB CHARACTER SET Utf8 COLLATE utf8_general_ci COMMENT = 'Características vista previa';
+
+# avantio portvil
+CREATE TABLE avantio_portvil(
+`id` int(11) COMMENT "identificador tabla",
+`text_title` varchar(75) COMMENT "título de la propiedad",
+`number_avantio` int(11) COMMENT "id avantio",
+`number_portvil` int(11) COMMENT "id portvil",
+`text_page_title` varchar(75) DEFAULT NULL COMMENT 'Título de la pestaña de la página',
+`text_slug` varchar(255) NOT NULL DEFAULT '' COMMENT 'Url manual (vacío usará auto slug)',
+`auto_slug` varchar(255) NOT NULL DEFAULT '' COMMENT 'Url corta (auto slug)',
+`text_meta_keywords` varchar(255) DEFAULT NULL COMMENT 'Meta Keywords (máx 255 carácteres)',
+`text_meta_description` varchar(255) DEFAULT NULL COMMENT 'Meta Description (max 255 characters)',
+`text_meta_robots` varchar(45) DEFAULT NULL COMMENT 'Meta Robots (max 45 characters)',
+`textarea_scripts_header` text COMMENT 'Aditional header scripts (Add tags &lt;script&gt;&lt;/script&gt;)',
+`textarea_scripts_body` text COMMENT 'Aditional footer scripts (Add tags &lt;script&gt;&lt;/script&gt;)',
+`status` varchar(128) DEFAULT "ACTIVED",
+`position` int(11) NOT NULL DEFAULT '0',
+PRIMARY KEY(`id`)
+)ENGINE=InnoDB CHARACTER SET Utf8 COLLATE utf8_general_ci COMMENT='Identificadores Avantio portvil';
+
+
+# availabilities_propietario
+CREATE TABLE avantio_availabilities_propietario LIKE avantio_availabilities;
+
+# gallery_partner
+CREATE TABLE gallery_partner(
+`id` int(11),
+`text_title` varchar(75),
+`text_alt` varchar(75),
+`image_principal` varchar(255),
+`status` varchar(128),
+`position` int(11),
+PRIMARY KEY(`id`)
+)ENGINE=InnoDB CHARACTER SET Utf8 COLLATE utf8_general_ci COMMENT='Galeria Partner';
+
+# partner
+CREATE TABLE partner(
+`id` int(11),
+`text_title` varchar(75),
+`status` varchar(128),
+`position` int(11),
+PRIMARY KEY(`id`)
+)ENGINE=InnoDB CHARACTER SET Utf8 COLLATE utf8_general_ci COMMENT='Partner';
+
 # consultas
 # CREATE DATABASE portvil CHARACTER SET utf8 collate utf8_general_ci;
 # drop database phpandfr_porvil;
@@ -240,6 +324,20 @@ PRIMARY KEY (`booking_code`)
 ) ENGINE=InnoDB CHARACTER SET Utf8 COLLATE utf8_general_ci COMMENT='Booking';
 
 
+CREATE TABLE `hshv_avantio_booking` (
+`booking_code` int(11) NOT NULL COMMENT 'id booking',
+`start_date` DATE NOT NULL COMMENT 'start date',
+`end_date` DATE NOT NULL COMMENT 'end date',
+`booking_date` TIMESTAMP NOT NULL COMMENT 'booking date',
+`check_in_schedule` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+`check_out_schedule` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+`creation_datetime` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+`last_modify_datetime` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+PRIMARY KEY (`booking_code`)
+) ENGINE=InnoDB CHARACTER SET Utf8 COLLATE utf8_general_ci COMMENT='Hshv Avantio Booking';
+
+
+
 CREATE TABLE `avantio_booking_tmp` (
 `booking_code` int(11) NOT NULL COMMENT 'id booking',
 `start_date` DATE NOT NULL COMMENT 'start date',
@@ -260,6 +358,13 @@ CREATE TABLE `avantio_booking_accommodation` (
   PRIMARY KEY (`booking_code`,`avantio_accomodations`)
 ) ENGINE=InnoDB CHARACTER SET Utf8 COLLATE utf8_general_ci COMMENT='Booking localizer';
 
+
+CREATE TABLE `hshv_avantio_booking_accommodation` (
+`booking_code` int(11) NOT NULL COMMENT 'id bookig',
+`avantio_accomodations` int(11) NOT NULL COMMENT 'identificador',
+`text_userid` varchar(75) DEFAULT '' COMMENT 'Id usuario',
+PRIMARY KEY (`booking_code`,`avantio_accomodations`)
+) ENGINE=InnoDB CHARACTER SET Utf8 COLLATE utf8_general_ci COMMENT='Booking localizer';
 
 
 CREATE TABLE `avantio_booking_accommodation_tmp` (
@@ -296,6 +401,15 @@ PRIMARY KEY (`booking_code`)
 
 
 CREATE TABLE `avantio_booking_details_tmp` (
+`booking_code` int(11) NOT NULL COMMENT 'id booking',
+`id_language` tinyint(3) NOT NULL COMMENT 'id language',
+`web` varchar(128) NOT NULL COMMENT 'web',
+`id_booking_type` tinyint(3) NOT NULL COMMENT 'id booking type',
+PRIMARY KEY (`booking_code`)
+) ENGINE=InnoDB CHARACTER SET Utf8 COLLATE utf8_general_ci COMMENT='Booking Details';
+
+
+CREATE TABLE `hshv_avantio_booking_details` (
 `booking_code` int(11) NOT NULL COMMENT 'id booking',
 `id_language` tinyint(3) NOT NULL COMMENT 'id language',
 `web` varchar(128) NOT NULL COMMENT 'web',

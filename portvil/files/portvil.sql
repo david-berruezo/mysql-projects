@@ -175,6 +175,8 @@ alter table hshv_avantio_accomodations drop column checkbox_distancias_aeropuert
 alter table hshv_avantio_accomodations drop column text_tipo_descuento;
 
 
+
+
 --
 -- Table structure for table `automatizacion`
 --

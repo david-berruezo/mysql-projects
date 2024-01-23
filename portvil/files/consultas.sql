@@ -1,9 +1,102 @@
+# update variable 1 incrmenetmos en 1
+SET @a  = 1;
+UPDATE avantio_ical SET id = @a:=@a+1 WHERE id IS NULL;
+
+# update con variable
+UPDATE textile_events e,
+    (
+    SELECT @n := 249
+    ) m
+SET e.seq_no = @n := @n + 1
+WHERE e.eid = 'headsup' AND e.paid = 'paid'
+
+
+# update | join | no funciona
+UPDATE avantio_ical as ai
+JOIN avantio_accomodations as aa on aa.id = ai.avantio_accomodations and aa.language = "es"
+SET text_title = aa.text_title;
+
+# update | select | no funciona
+UPDATE avantio_ical as ai ,
+    (
+    SELECT * from avantio_accomodations
+    WHERE language = "es"
+    ) as x
+SET ai.text_title = x.text_title
+WHERE  ai.avantio_accomodations = x.id;
+
+# update | select | no funciona
+
+# update | dos tablas | encuentra pero no actualiza
+UPDATE avantio_ical as ai , avantio_accomodations as aa
+SET ai.text_title = aa.text_title
+WHERE ai.avantio_accomodations = aa.id and aa.language = "es";
+
+# update left join | dos tablas | encuentra pero no actualiza
+UPDATE avantio_ical as ai
+LEFT JOIN avantio_accomodations as aa on aa.id = ai.avantio_accomodations and aa.language = "es"
+SET ai.text_title = aa.text_title;
+
+# update join | dos tablas | encuentra pero no actualiza
+UPDATE avantio_ical as ai
+JOIN avantio_accomodations as aa on aa.id = ai.avantio_accomodations and aa.language = "es"
+SET ai.text_title = aa.text_title;
+
+# update subselect | dos tablas
+UPDATE avantio_ical SET text_title =
+(
+SELECT text_title
+FROM avantio_accomodations as aa
+WHERE aa.id = avantio_ical.avantio_accomodations
+AND aa.language = "es"
+);
+
+
+INSERT INTO dynamic_faqsagentes_type
+SELECT dp.*
+FROM pisosenm_inmobiliaria_seis.dynamic_faqsagentes_type as dp;
+
+SELECT * FROM avantio_accomodations where language = "es";
+SELECT * FROM hshv_avantio_accomodations where language = "es";
+
+SELECT a.id , a.id_avantio
+FROM avantio_accomodations a
+LEFT JOIN dynamic_geocity as dg on dg.id = a.dynamic_geocity
+LEFT JOIN avantio_rates as r on r.accommodation_id = a.id
+LEFT JOIN avantio_accomodations_extras as aae on aae.avantio_accomodations = a.id
+LEFT JOIN avantio_accomodations_locations l ON a.id = l.avantio_accomodations
+WHERE a.language = 'es'
+AND a.status = 'ACTIVED'
+AND a.number_habitaciones >= 0
+AND a.id IN(297527,326472,297523,297537,297654,322419,326303,326085,326678,373586,305867,297719,297725,297879,297933,297941,297973,323013,298029,298330,301950,327544,324450,326301,298112,301350,301401,297977,297942,297978,297980,297981,301580,301581,297982,301584,301585,301586,298128,352807,297997,332232,326478,298189,327319,298196,345541,331114,310974,310981,311607,311745)
+UNION ALL
+SELECT b.id , b.id_avantio
+FROM hshv_avantio_accomodations b
+LEFT JOIN dynamic_geocity as dg on dg.id = b.dynamic_geocity
+LEFT JOIN hshv_avantio_rates as rh on rh.accommodation_id = b.id
+LEFT JOIN hshv_avantio_accomodations_extras as haae on haae.avantio_accomodations = b.id
+LEFT JOIN hshv_avantio_accomodations_locations hl ON b.id = hl.avantio_accomodations
+WHERE b.language = 'es'
+AND b.status = 'ACTIVED'
+AND b.number_habitaciones >= 0
+ORDER by id asc
+
+SELECT * FROM avantio_accomodations
+where language = "es" and id = 297704
+order by id asc;
+
+SELECT ap.* FROM avantio_accomodations_pictures as ap
+where avantio_accomodations = 297704
+order by id asc
+limit 1;
+
+SELECT * FROM dynamic_agencia;
+SELECT * FROM users;
 
 SELECT COLUMN_NAME
 FROM information_schema.columns
 WHERE  TABLE_NAME = "plantilla"
 AND table_schema = "homeswe1_web_dos";
-
 
 'id'
 'language'
@@ -131,7 +224,60 @@ AND table_schema = "homeswe1_web_dos";
 'status'
 'position'
 
+# insert | select
+INSERT INTO dynamic_faqsagentes_type
+SELECT dp.*
+FROM pisosenm_inmobiliaria_seis.dynamic_faqsagentes_type as dp;
 
+INSERT INTO dynamic_faqsinmobiliarias_type
+SELECT dp.*
+FROM pisosenm_inmobiliaria_seis.dynamic_faqsinmobiliarias_type as dp;
+
+INSERT INTO dynamic_faqspropietarios_type
+SELECT dp.*
+FROM pisosenm_inmobiliaria_seis.dynamic_faqspropietarios_type as dp;
+
+INSERT INTO dynamic_faqsagentes_type
+SELECT dp.*
+FROM pisosenm_inmobiliaria_seis.dynamic_faqsagentes_type as dp;
+
+INSERT INTO dynamic_faqsinmobiliarias
+SELECT dp.*
+FROM pisosenm_inmobiliaria_seis.dynamic_faqsinmobiliarias as dp;
+
+INSERT INTO dynamic_faqspropietarios
+SELECT dp.*
+FROM pisosenm_inmobiliaria_seis.dynamic_faqspropietarios as dp;
+
+
+# bookings
+SELECT ab.* , abd.web , abaa.total_price , aa.text_title, abt.booking_type , abl.id_avantio_booking_localizer
+FROM avantio_booking_accommodation AS aba
+JOIN avantio_booking AS ab ON ab.booking_code = aba.booking_code
+JOIN avantio_booking_localizer as abl ON abl.booking_code = ab.booking_code
+JOIN avantio_booking_details as abd on abd.booking_code = ab.booking_code
+JOIN avantio_booking_amount as abaa on abaa.booking_code = ab.booking_code
+JOIN avantio_accomodations as aa ON aa.id = aba.avantio_accomodations
+JOIN avantio_booking_type as abt ON abt.id_booking_type = abd.id_booking_type
+# JOIN avantio_client as client on client.id_avantio_client = abd.id
+# JOIN avantio_booking_payment as abp on abp.booking_code = ab.booking_code
+WHERE aba.avantio_accomodations = 297704
+AND abd.id_language = 1
+AND aa.language = "es"
+# order by ab.booking_date desc;
+order by ab.start_date asc;
+
+# availabilities
+SELECT *
+FROM avantio_availabilities
+where accommodation_id = 297704
+ORDER BY fecha asc;
+
+# occupation rules
+SELECT *
+FROM avantio_occupation_rules
+where id = 1255882
+ORDER BY fecha asc;
 
 # servicios por defecto
 SELECT ds.*

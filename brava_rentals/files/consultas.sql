@@ -213,8 +213,6 @@ and post_parent = 371244;
 select * from wp_posts
 where post_type = "attachment";
 
-
-
 delete  from wp_posts
 where post_type = "attachment"
 AND post_title like "blogmedia%";

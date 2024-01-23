@@ -1,3 +1,48 @@
+USE homeswe1_web_dos;
+
+ALTER TABLE mrbs_repeat ADD COLUMN checkin DATE;
+ALTER TABLE mrbs_repeat ADD COLUMN checkout DATE;
+
+/*
+use pisosenm_inmobiliaria_siete_pruebas_dos;
+
+
+UPDATE user SET roles = '[{"role":"ROLE_USER"}]' WHERE id = 1;
+SELECT * FROM USER;
+
+
+UPDATE USER SET PASSWORD = '64e045fd72c5bf65f596f7e2b04f0944' WHERE id = 1;
+# DELETE USER FROM USER WHERE id > 1;
+SELECT * FROM post;
+SELECT * FROM user;
+
+
+use phpandfr_portvil_dos;
+
+
+SELECT * FROM avantio_accommodations_historico_data WHERE DATE = "2022-12-29";
+
+
+SELECT * FROM avantio_rates; 
+
+SELECT * 
+FROM avantio_occupation_rules
+LIMIT 100;
+
+SELECT * FROM avantio_accommodations_historico_data
+WHERE DATE = "2022-12-18";
+
+SELECT * FROM avantio_accommodations_historico_data
+WHERE DATE = "2022-12-18"; 
+
+
+CREATE TABLE `avantio_accommodations_historico_data` (
+`id` int(11) NOT NULL COMMENT 'identificador',
+`date` DATE NOT NULL COMMENT 'start date',
+`avantio_accommodations` JSON NOT NULL,
+PRIMARY KEY (`id` , `date` , `avantio_accommodations`)
+) ENGINE=InnoDB CHARACTER SET Utf8 COLLATE utf8_general_ci COMMENT='Avantio Accommodations';
+
 # consultas
 # CREATE DATABASE portvil CHARACTER SET utf8 collate utf8_general_ci;
 # drop database phpandfr_porvil;
@@ -5,7 +50,7 @@
 
 use phpandfr_portvil;
 
-#disponibilidades , #no_disponibilidades , #checkin , checkout , min_ninghts
+# disponibilidades , #no_disponibilidades , #checkin , checkout , min_ninghts
 
 select * from avantio_accomodations;
 
@@ -104,19 +149,17 @@ PRIMARY KEY (`id_avantio_client`)
 
 
 
-
-/*
 SHOW TABLE STATUS 
 where 
 name like 'dynamic_%' 
 or 
 name like 'avantio_%';
-*/
+
 
 # SHOW TABLE STATUS LIKE 'dynamic_%';
 # SHOW TABLE STATUS LIKE ('avantio_accomodations' OR 'avantio_accomodations_descriptions');
 
-/*
+
 1, franquiciado, $2y$10$xCwCRpI4ybOI/usAUvRT8esS5cAZrgpOApAkz9ylnU2sxTolQPypW, davidberruezo@davidberruezo.com, franquicia, 1, ACTIVED, 0000-00-00 00:00:00, 0000-00-00 00:00:00, 
 
 

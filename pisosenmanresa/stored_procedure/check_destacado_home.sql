@@ -20,7 +20,7 @@ BEGIN
 			LEFT JOIN dynamic_gallery_inmo as dgi on dgi.id = dr.dynamic_gallery_inmo
 			WHERE dr.dynamic_taxonomy_group = 1 and dr.checkbox_destacado_home = 0 and dgi.image_1 <> "https://www.pisosenmanresa.com/nofotos.gif"
 			ORDER BY RAND()
-			LIMIT 3;
+	LIMIT 3;
 	DECLARE cursor_casa CURSOR FOR
 			SELECT dr.id
 			FROM dynamic_rooms as dr
@@ -87,47 +87,49 @@ from dynamic_rooms as dr
 left join dynamic_gallery_inmo as dgi on dgi.id = dr.dynamic_gallery_inmo
 where dr.dynamic_taxonomy_group = 1 and dr.checkbox_destacado_home = 1 and dgi.image_1 <> "https://www.pisosenmanresa.com/nofotos.gif";
 
-
 select count(*) into contador_casa
 from dynamic_rooms as dr
 left join dynamic_gallery_inmo as dgi on dgi.id = dr.dynamic_gallery_inmo
 where dr.dynamic_taxonomy_group = 2 and dr.checkbox_destacado_home = 1 and dgi.image_1 <> "https://www.pisosenmanresa.com/nofotos.gif";
-
 
 select count(*) into contador_oficina
 from dynamic_rooms as dr
 left join dynamic_gallery_inmo as dgi on dgi.id = dr.dynamic_gallery_inmo
 where dr.dynamic_taxonomy_group = 3 and dr.checkbox_destacado_home = 1 and dgi.image_1 <> "https://www.pisosenmanresa.com/nofotos.gif";
 
-
 select count(*) into contador_local
 from dynamic_rooms as dr
 left join dynamic_gallery_inmo as dgi on dgi.id = dr.dynamic_gallery_inmo
 where dr.dynamic_taxonomy_group = 4 and dr.checkbox_destacado_home = 1 and dgi.image_1 <> "https://www.pisosenmanresa.com/nofotos.gif";
-
 
 select count(*) into contador_parking
 from dynamic_rooms as dr
 left join dynamic_gallery_inmo as dgi on dgi.id = dr.dynamic_gallery_inmo
 where dr.dynamic_taxonomy_group = 5 and dr.checkbox_destacado_home = 1 and dgi.image_1 <> "https://www.pisosenmanresa.com/nofotos.gif";
 
-
 select count(*) into contador_terreno
 from dynamic_rooms as dr
 left join dynamic_gallery_inmo as dgi on dgi.id = dr.dynamic_gallery_inmo
 where dr.dynamic_taxonomy_group = 6 and dr.checkbox_destacado_home = 1 and dgi.image_1 <> "https://www.pisosenmanresa.com/nofotos.gif";
-
 
 select count(*) into contador_nave
 from dynamic_rooms as dr
 left join dynamic_gallery_inmo as dgi on dgi.id = dr.dynamic_gallery_inmo
 where dr.dynamic_taxonomy_group = 7 and dr.checkbox_destacado_home = 1 and dgi.image_1 <> "https://www.pisosenmanresa.com/nofotos.gif";
 
-
 select count(*) into contador_edificio
 from dynamic_rooms as dr
 left join dynamic_gallery_inmo as dgi on dgi.id = dr.dynamic_gallery_inmo
 where dr.dynamic_taxonomy_group = 8 and dr.checkbox_destacado_home = 1 and dgi.image_1 <> "https://www.pisosenmanresa.com/nofotos.gif";
+
+
+DECLARE cursor_piso CURSOR FOR
+SELECT dr.id
+FROM dynamic_rooms as dr
+LEFT JOIN dynamic_gallery_inmo as dgi on dgi.id = dr.dynamic_gallery_inmo
+WHERE dr.dynamic_taxonomy_group = 1 and dr.checkbox_destacado_home = 0 and dgi.image_1 <> "https://www.pisosenmanresa.com/nofotos.gif"
+ORDER BY RAND()
+LIMIT 3;
 
 IF (contador_piso < 8) THEN
 	SET l_last_row_fetched = 0;
@@ -141,6 +143,7 @@ IF (contador_piso < 8) THEN
     END LOOP piso_loop;
     CLOSE cursor_piso;
 END IF;
+
 
 IF (contador_casa < 8) THEN
 	SET l_last_row_fetched = 0;

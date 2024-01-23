@@ -4,10 +4,110 @@
 # CREATE DATABASE plottadm_blog CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci;
 # CREATE DATABASE plottadm_blog_mio CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci;
 
+
+CREATE TABLE `dynamic_forms`
+(
+    `id` int(11) NOT NULL DEFAULT '0' COMMENT 'Identificador del form',
+    `language` varchar(3) NOT NULL DEFAULT 'es' COMMENT 'Lenguagje aplicación',
+    `text_title` varchar(255) default "" COMMENT 'Nombre del formulario de contacto',
+    `text_nombre` varchar(255) default "" COMMENT 'Nombre del cliente',
+    `text_apellidos` varchar(255) default "" COMMENT 'Apellidos del cliente',
+    `text_email` varchar(255) default "" COMMENT 'Email del cliente',
+    `text_telf` varchar(255) default "" COMMENT 'Telf del cliente',
+    `text_fecha_viaje` varchar(255) default "" COMMENT 'Fecha viaje del cliente',
+    `text_destino` varchar(255) default "" COMMENT 'Destino viaje del cliente',
+    `text_direccion_propiedad` varchar(255) default "" COMMENT 'Dirección de la propiedad',
+    `text_presupuesto` varchar(255) default "" COMMENT 'Destino viaje del cliente',
+    `text_links_fotos` varchar(255) default "" COMMENT 'Links de fotos del cliente',
+    `text_hora_contactar` varchar(255) default "" COMMENT 'Hora contactar del cliente',
+    `text_que_necesitas` varchar(255) default "" COMMENT 'Que necesitas del cliente',
+    `textarea_comentarios` text COMMENT 'Comentarios cliente',
+    `textarea_observaciones` text COMMENT 'Observaciones cliente',
+    `checkbox_met_email` tinyint(3) DEFAULT NULL COMMENT 'Tipo de contacto email',
+    `checkbox_met_tlf` tinyint(3) DEFAULT NULL COMMENT 'Tipo de contacto teléfono',
+    `checkbox_met_whats` tinyint(3) DEFAULT NULL COMMENT 'Tipo de contacto whats up',
+    `dynamic_forms_tipo_contacto` int(11) NOT NULL DEFAULT '0' COMMENT 'Formulario tipo de contacto',
+    `dynamic_forms_tipo_formulario` int(11) NOT NULL DEFAULT '0' COMMENT 'Formulario tipo de formulario',
+    `checkbox_politica_privacidad` tinyint(3) DEFAULT NULL COMMENT 'Politica de privacidad',
+    `checkbox_recibir_informacion` tinyint(3) DEFAULT NULL COMMENT 'Recibir informacion',
+    `avantio_accomodations`int(11) DEFAULT '0' COMMENT 'Identificador de la propiedad',
+    `text_street_view`varchar(255) DEFAULT 'nombre cliente' COMMENT 'Nombre del cliente',
+    `text_page_title` varchar(255) DEFAULT NULL COMMENT 'Título sobre el alojamiento',
+    `auto_slug` varchar(255) NOT NULL DEFAULT '' COMMENT 'Url corta (auto slug)',
+    `text_slug` varchar(255) NOT NULL DEFAULT '' COMMENT 'Url manual (vacío usará auto slug)',
+    `text_meta_keywords` varchar(255) DEFAULT NULL COMMENT 'Meta Keywords (máx 255 characters)',
+    `text_meta_robots` varchar(255) DEFAULT NULL COMMENT 'Meta Robots (max 45 characters)',
+    `text_meta_description` text COMMENT 'Meta Description (max 255 characters)',
+    `textarea_scripts_header` text COMMENT 'Aditional header scripts (Add tags &lt;script&gt;&lt;/script&gt;)',
+    `textarea_scripts_body` text COMMENT 'Aditional footer scripts (Add tags &lt;script&gt;&lt;/script&gt;)',
+    `status` varchar(128) DEFAULT NULL,
+    `position` int(11) NOT NULL DEFAULT '0',
+    PRIMARY KEY (`id`)
+) ENGINE=InnoDB CHARACTER SET Utf8 COLLATE utf8_general_ci COMMENT = 'Fomrulario aplicación';
+
+# checkbox whatsup telf email
+CREATE TABLE `dynamic_forms_tipo_contacto`
+(
+    `id` int(11) NOT NULL DEFAULT '0' COMMENT 'Identificador del form',
+    `text_title` varchar(255) default "" COMMENT 'Nombre del tipo de contacto',
+    `text_page_title` varchar(255) DEFAULT NULL COMMENT 'Título sobre el alojamiento',
+    `auto_slug` varchar(255) NOT NULL DEFAULT '' COMMENT 'Url corta (auto slug)',
+    `text_slug` varchar(255) NOT NULL DEFAULT '' COMMENT 'Url manual (vacío usará auto slug)',
+    `text_meta_keywords` varchar(255) DEFAULT NULL COMMENT 'Meta Keywords (máx 255 characters)',
+    `text_meta_robots` varchar(255) DEFAULT NULL COMMENT 'Meta Robots (max 45 characters)',
+    `text_meta_description` text COMMENT 'Meta Description (max 255 characters)',
+    `textarea_scripts_header` text COMMENT 'Aditional header scripts (Add tags &lt;script&gt;&lt;/script&gt;)',
+    `textarea_scripts_body` text COMMENT 'Aditional footer scripts (Add tags &lt;script&gt;&lt;/script&gt;)',
+    `status` varchar(128) DEFAULT NULL,
+    `position` int(11) NOT NULL DEFAULT '0',
+    PRIMARY KEY (`id`)
+) ENGINE=InnoDB CHARACTER SET Utf8 COLLATE utf8_general_ci COMMENT = 'Tipos de contacto';
+
+# contacto | experiencias | propietarios | listado propiedades | detalle de la propiedad
+CREATE TABLE `dynamic_forms_tipo_formulario`
+(
+    `id` int(11) NOT NULL DEFAULT '0' COMMENT 'Identificador del tipo de formulario',
+    `text_title` varchar(255) default "" COMMENT 'Nombre del tipo de formulario',
+    `text_page_title` varchar(255) DEFAULT NULL COMMENT 'Título sobre el alojamiento',
+    `auto_slug` varchar(255) NOT NULL DEFAULT '' COMMENT 'Url corta (auto slug)',
+    `text_slug` varchar(255) NOT NULL DEFAULT '' COMMENT 'Url manual (vacío usará auto slug)',
+    `text_meta_keywords` varchar(255) DEFAULT NULL COMMENT 'Meta Keywords (máx 255 characters)',
+    `text_meta_robots` varchar(255) DEFAULT NULL COMMENT 'Meta Robots (max 45 characters)',
+    `text_meta_description` text COMMENT 'Meta Description (max 255 characters)',
+    `textarea_scripts_header` text COMMENT 'Aditional header scripts (Add tags &lt;script&gt;&lt;/script&gt;)',
+    `textarea_scripts_body` text COMMENT 'Aditional footer scripts (Add tags &lt;script&gt;&lt;/script&gt;)',
+    `status` varchar(128) DEFAULT NULL,
+    `position` int(11) NOT NULL DEFAULT '0',
+    PRIMARY KEY (`id`)
+) ENGINE=InnoDB CHARACTER SET Utf8 COLLATE utf8_general_ci COMMENT = 'Tipos de formlario';
+
+
 CREATE DATABASE tiendapi_inmobiliaria_dos CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci;
 
-
 use pisosenm_inmobiliaria_tres;
+
+CREATE TABLE `plantilla_pago`
+(
+    `id` int(11) NOT NULL DEFAULT '0' COMMENT 'Identificador del inmueble',
+    `id_pago` int(11) DEFAULT '0' COMMENT 'Identificador del pago',
+    `avantio_accomodations`int(11) DEFAULT '0' COMMENT 'Identificador de la propiedad',
+    `text_nombre_cliente`varchar(255) DEFAULT 'nombre cliente' COMMENT 'Nombre del cliente',
+    `number_importe`  DECIMAL(5,2) DEFAULT '0.00' COMMENT 'Importe del pago',
+    `textarea_descripcion_cliente`text DEFAULT 'descripción cliente' COMMENT 'Descripción del cliente',
+    `text_page_title` varchar(255) DEFAULT NULL COMMENT 'Título sobre el alojamiento',
+    `auto_slug` varchar(255) NOT NULL DEFAULT '' COMMENT 'Url corta (auto slug)',
+    `text_slug` varchar(255) NOT NULL DEFAULT '' COMMENT 'Url manual (vacío usará auto slug)',
+    `text_meta_keywords` varchar(255) DEFAULT NULL COMMENT 'Meta Keywords (máx 255 characters)',
+    `text_meta_robots` varchar(255) DEFAULT NULL COMMENT 'Meta Robots (max 45 characters)',
+    `text_meta_description` text COMMENT 'Meta Description (max 255 characters)',
+    `textarea_scripts_header` text COMMENT 'Aditional header scripts (Add tags &lt;script&gt;&lt;/script&gt;)',
+    `textarea_scripts_body` text COMMENT 'Aditional footer scripts (Add tags &lt;script&gt;&lt;/script&gt;)',
+    `status` varchar(128) DEFAULT NULL,
+    `position` int(11) NOT NULL DEFAULT '0',
+    PRIMARY KEY (`id`)
+) ENGINE=InnoDB CHARACTER SET Utf8 COLLATE utf8_general_ci COMMENT = 'Plantilla de pago';
+
+
 
 CREATE TABLE `plantilla`(
 `id` int(11) NOT NULL DEFAULT '0' COMMENT 'Identificador del inmueble',
