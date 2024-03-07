@@ -1,5 +1,6 @@
 USE homeswe1_web_dos;
 
+# union
 # colecciones | taxonomy_geographic_language_extra | text_avantio == tag avantio
 SELECT * FROM dynamic_taxonomy_geographic_language_extra 
 WHERE LANGUAGE = "es";
