@@ -2,10 +2,10 @@ use phpandfr_portvil_tres;
 
 SELECT * FROM formulario_dudas;
 
-/*
 SELECT * FROM dynamic_taxonomy where language = "es";
 SELECT * FROM dynamic_taxonomy_geographic_language_fields_customitzation;
 
+# alguna subconsulta
 SELECT MAX(1) 
 FROM dynamic_taxonomy_geographic_language_fields_customitzation
 GROUP BY language , dynamic_geocountry;
@@ -119,5 +119,3 @@ FROM
 		WHERE d.dynamic_geocountry = 1
     ) AS datos
 ) AS countries;
-
-*/
