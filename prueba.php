@@ -1,0 +1,25 @@
+<?php
+DROP TABLE IF EXISTS avantio_accomodations;
+DROP TABLE IF EXISTS avantio_accomodations_pictures;
+DROP TABLE IF EXISTS avantio_availabilities;
+DROP TABLE IF EXISTS avantio_occupation_rules;
+DROP TABLE IF EXISTS avantio_pricemodifiers;
+DROP TABLE IF EXISTS avantio_rates;
+DROP TABLE IF EXISTS categoria;
+DROP TABLE IF EXISTS category;
+DROP TABLE IF EXISTS customer;
+DROP TABLE IF EXISTS dynamic_geocity;
+DROP TABLE IF EXISTS dynamic_geocountry;
+DROP TABLE IF EXISTS dynamic_geodistrict;
+DROP TABLE IF EXISTS dynamic_geolocality;
+DROP TABLE IF EXISTS dynamic_georegion;
+DROP TABLE IF EXISTS dynamic_pages;
+DROP TABLE IF EXISTS dynamic_taxonomy;
+DROP TABLE IF EXISTS etiqueta;
+DROP TABLE IF EXISTS hshv_avantio_accomodations_real;
+DROP TABLE IF EXISTS hshv_avantio_availabilities;
+DROP TABLE IF EXISTS hshv_avantio_occupation_rules;
+DROP TABLE IF EXISTS hshv_avantio_pricemodifiers;
+DROP TABLE IF EXISTS hshv_avantio_rates;
+DROP TABLE IF EXISTS hshv_dynamic_rooms;
+DROP TABLE IF EXISTS language;

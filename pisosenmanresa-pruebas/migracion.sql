@@ -118,9 +118,7 @@ WHERE (ds.status = 'ACTIVED' OR ds.status = 'PAUSED');
 #AND aa.number_banyos_banyera + aa.number_banyos_ducha >= 0 
 #AND aa.number_habitaciones >= 0;
 
-
 SELECT * FROM avantio_accommodations_historico_data;
-
 
 SELECT * FROM avantio_booking_type;
 
